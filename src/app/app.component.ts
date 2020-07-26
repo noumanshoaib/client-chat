@@ -32,7 +32,7 @@ export class AppComponent {
       event.isLoginSuccess.subscribe((data) => {
         if(data){
           this.isLogin = true;
-          this.router.navigateByUrl('home');
+          window.location.href = '/home';
         }
       });
     }
