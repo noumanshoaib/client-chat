@@ -1,0 +1,59 @@
+
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<div id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+				<img id="profile-img" src="assets/images/me.png" class="online" alt="" />
+				<p>{{user.name}}</p>
+				<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+				
+			</div>
+		</div>
+		<div id="search">
+			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+			<input type="text" placeholder="Search contacts..." />
+		</div>
+		<div id="contacts" >
+			<ul *ngFor="let friend of friends">
+				
+				<li (click) = "changeUser(friend.user.id,friend.user.name)" class="contact {{friend.user.id == selectedUser.id ? 'active': ''}}">
+					<div class="wrap">
+						<span class="contact-status busy"></span>
+						<img style="width: 10%;" src="assets/images/user.png" alt="" />
+						<div class="meta">
+							<p class="name">{{friend.user.name}}</p>
+						</div>
+					</div>
+				</li>
+			
+			</ul>
+		</div>
+	</div>
+	<div class="content">
+		<div class="contact-profile">
+			<img src="#" alt="" />
+			<p>{{selectedUser.name}}</p>
+			<div class="social-media">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+				 <i class="fa fa-instagram" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div #scrollframe class="messages">
+			<ul *ngFor="let message of messages">
+				<li  class="{{message.from == selectedUser.id ? 'replies' : 'sent'}}">
+					<img src="assets/images/{{message.from == selectedUser.id ? 'user.png' : 'me.png'}}" alt="" />
+					<p>{{message.message}}</p>
+				</li>
+				
+			</ul>
+		</div>
+		<div class="message-input">
+			<div class="wrap">
+			<input [(ngModel)] = 'newMessage' (keyup.enter)="sendMessage()" type="text" placeholder="Write your message..." />
+			<button (click)="sendMessage()" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
